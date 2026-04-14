@@ -1,0 +1,713 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>Megha Mohanty | RM & HR Professional</title>
+  <meta name="description" content="Megha Mohanty - Relationship Manager & HR Strategist. Award-winning professional blending banking excellence with human capital expertise.">
+  <!-- Google Fonts & Font Awesome -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --bg-dark: #0A0C10;
+      --surface-dark: #1A1E2C;
+      --card-dark: rgba(26, 30, 44, 0.7);
+      --text-dark-primary: #FFFFFF;
+      --text-dark-secondary: #B0B8C5;
+      --accent: #6C63FF;
+      --accent-glow: rgba(108, 99, 255, 0.4);
+      --accent-gradient: linear-gradient(135deg, #6C63FF, #3F3D9E);
+      --border-dark: rgba(108, 99, 255, 0.2);
+      
+      --bg-light: #F8F9FF;
+      --surface-light: #FFFFFF;
+      --card-light: rgba(255, 255, 255, 0.75);
+      --text-light-primary: #1E1B4B;
+      --text-light-secondary: #4B5563;
+      --border-light: rgba(0, 0, 0, 0.05);
+      
+      --transition: all 0.4s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+      --shadow: 0 20px 35px -12px rgba(0, 0, 0, 0.3);
+      --glass-blur: blur(14px);
+      --border-radius-card: 2rem;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      transition: background 0.3s ease, color 0.2s ease;
+      overflow-x: hidden;
+      scroll-behavior: smooth;
+    }
+
+    body.dark {
+      background: var(--bg-dark);
+      color: var(--text-dark-secondary);
+    }
+
+    body.light {
+      background: var(--bg-light);
+      color: var(--text-light-secondary);
+    }
+
+    /* ========== ENHANCED PRELOADER with WELCOME & HUMBLE TOUCH ========== */
+    .preloader {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: #0A0C10;
+      z-index: 9999;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      transition: opacity 0.8s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+      backdrop-filter: blur(0px);
+    }
+    .preloader.hide {
+      opacity: 0;
+      pointer-events: none;
+    }
+    .preloader-content {
+      text-align: center;
+      animation: gentleFloat 2s ease-in-out infinite;
+    }
+    @keyframes gentleFloat {
+      0% { transform: translateY(0px); }
+      50% { transform: translateY(-10px); }
+      100% { transform: translateY(0px); }
+    }
+    .preloader-ring {
+      width: 70px;
+      height: 70px;
+      margin: 0 auto 1.5rem auto;
+      border: 3px solid rgba(108, 99, 255, 0.2);
+      border-top: 3px solid var(--accent);
+      border-radius: 50%;
+      animation: spin 0.9s cubic-bezier(0.68, -0.55, 0.265, 1.55) infinite;
+      box-shadow: 0 0 15px rgba(108,99,255,0.3);
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+    .welcome-message {
+      font-size: 1.4rem;
+      font-weight: 500;
+      background: var(--accent-gradient);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      letter-spacing: -0.3px;
+      margin-bottom: 0.8rem;
+    }
+    .humble-line {
+      font-size: 0.9rem;
+      color: var(--text-dark-secondary);
+      opacity: 0.8;
+      max-width: 280px;
+      margin: 0 auto;
+    }
+    .preloader-dots {
+      display: flex;
+      justify-content: center;
+      gap: 8px;
+      margin-top: 1rem;
+    }
+    .preloader-dots span {
+      width: 6px;
+      height: 6px;
+      background: var(--accent);
+      border-radius: 50%;
+      display: inline-block;
+      animation: dotPulse 1.4s infinite ease-in-out;
+    }
+    .preloader-dots span:nth-child(2) { animation-delay: 0.2s; }
+    .preloader-dots span:nth-child(3) { animation-delay: 0.4s; }
+    @keyframes dotPulse {
+      0%, 100% { transform: scale(0.6); opacity: 0.3; }
+      50% { transform: scale(1.2); opacity: 1; }
+    }
+
+    /* ========== SCROLL PROGRESS ========== */
+    .progress-bar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 0%;
+      height: 4px;
+      background: var(--accent-gradient);
+      z-index: 1000;
+      transition: width 0.1s;
+    }
+
+    /* ========== BACK TO TOP ========== */
+    .back-to-top {
+      position: fixed;
+      bottom: 2rem;
+      right: 2rem;
+      background: var(--accent);
+      color: white;
+      width: 45px;
+      height: 45px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.3s;
+      z-index: 99;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+    }
+    .back-to-top.show { opacity: 1; visibility: visible; }
+
+    /* ========== NAVBAR ========== */
+    .navbar {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      backdrop-filter: var(--glass-blur);
+      background: rgba(10, 12, 16, 0.75);
+      z-index: 100;
+      padding: 1rem 2rem;
+      transition: 0.3s;
+      border-bottom: 1px solid var(--border-dark);
+    }
+    body.light .navbar { background: rgba(248, 249, 255, 0.8); border-bottom: 1px solid var(--border-light); }
+    .nav-container {
+      max-width: 1400px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .logo {
+      font-size: 1.7rem;
+      font-weight: 800;
+      background: var(--accent-gradient);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      align-items: center;
+    }
+    .nav-links a {
+      text-decoration: none;
+      font-weight: 500;
+      transition: 0.2s;
+    }
+    body.dark .nav-links a { color: var(--text-dark-secondary); }
+    body.light .nav-links a { color: var(--text-light-primary); }
+    .nav-links a:hover { color: var(--accent); }
+    .theme-toggle {
+      background: none;
+      border: none;
+      font-size: 1.3rem;
+      cursor: pointer;
+      color: inherit;
+    }
+    .hamburger { display: none; font-size: 1.6rem; cursor: pointer; }
+    @media (max-width: 768px) {
+      .nav-links {
+        position: fixed;
+        top: 70px;
+        left: -100%;
+        flex-direction: column;
+        width: 75%;
+        height: 100vh;
+        background: rgba(10,12,16,0.96);
+        backdrop-filter: blur(20px);
+        padding: 2rem;
+        transition: 0.3s;
+        gap: 2rem;
+      }
+      body.light .nav-links { background: rgba(248,249,255,0.96); }
+      .nav-links.active { left: 0; }
+      .hamburger { display: block; }
+    }
+
+    /* ========== HERO ========== */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      position: relative;
+      overflow: hidden;
+      padding: 6rem 2rem 4rem;
+    }
+    .animated-bg {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: radial-gradient(circle at 30% 50%, rgba(108,99,255,0.12), transparent 70%);
+      animation: floatBg 12s infinite alternate;
+    }
+    @keyframes floatBg { 0% { transform: scale(1) translate(0,0); opacity: 0.5; } 100% { transform: scale(1.1) translate(2%, 2%); opacity: 0.8; } }
+    .hero-content {
+      max-width: 1300px;
+      margin: 0 auto;
+      position: relative;
+      z-index: 2;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 3rem;
+    }
+    .hero-text { flex: 1.2; }
+    .hero-badge {
+      background: rgba(108,99,255,0.15);
+      backdrop-filter: blur(4px);
+      display: inline-block;
+      padding: 0.3rem 1rem;
+      border-radius: 40px;
+      font-size: 0.8rem;
+      margin-bottom: 1rem;
+      border-left: 2px solid var(--accent);
+    }
+    h1 { font-size: 3.6rem; font-weight: 800; line-height: 1.2; }
+    .gradient-text { background: var(--accent-gradient); -webkit-background-clip: text; background-clip: text; color: transparent; }
+    .typing { font-size: 1.5rem; font-weight: 600; margin: 1rem 0; }
+    .typing span { border-right: 2px solid var(--accent); animation: blink 0.7s infinite; }
+    @keyframes blink { 50% { border-color: transparent; } }
+    .btn-group { display: flex; gap: 1rem; margin-top: 2rem; flex-wrap: wrap; }
+    .btn-primary, .btn-outline {
+      padding: 0.8rem 2rem;
+      border-radius: 50px;
+      font-weight: 600;
+      text-decoration: none;
+      transition: 0.2s;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+    }
+    .btn-primary { background: var(--accent-gradient); color: white; box-shadow: 0 0 12px var(--accent-glow); }
+    .btn-primary:hover { transform: translateY(-3px); filter: brightness(1.05); }
+    .btn-outline { border: 1.5px solid; }
+    body.dark .btn-outline { border-color: var(--accent); color: var(--accent); }
+    body.light .btn-outline { border-color: var(--accent); color: var(--accent); }
+
+    /* Profile Picture */
+    .profile-wrapper {
+      width: 280px;
+      height: 280px;
+      margin: 0 auto;
+      position: relative;
+      border-radius: 38% 62% 44% 56% / 62% 38% 62% 38%;
+      overflow: hidden;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+      transition: all 0.4s ease;
+      border: 3px solid rgba(108,99,255,0.4);
+    }
+    .profile-wrapper img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s; }
+    .profile-wrapper:hover { transform: scale(1.02); border-color: var(--accent); }
+    .profile-wrapper:hover img { transform: scale(1.05); }
+    @media (max-width: 768px) { .profile-wrapper { width: 200px; height: 200px; } }
+
+    /* ========== SECTIONS ========== */
+    section { padding: 5rem 2rem; }
+    .container { max-width: 1300px; margin: 0 auto; }
+    .section-title {
+      font-size: 2.5rem;
+      font-weight: 700;
+      margin-bottom: 3rem;
+      text-align: center;
+      position: relative;
+    }
+    .section-title:after {
+      content: '';
+      position: absolute;
+      bottom: -12px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 70px;
+      height: 3px;
+      background: var(--accent-gradient);
+      border-radius: 3px;
+    }
+    .glass-card {
+      background: var(--card-dark);
+      backdrop-filter: var(--glass-blur);
+      border-radius: var(--border-radius-card);
+      border: 1px solid var(--border-dark);
+      padding: 2rem;
+      transition: var(--transition);
+    }
+    body.light .glass-card { background: var(--card-light); border: 1px solid var(--border-light); box-shadow: 0 10px 30px -10px rgba(0,0,0,0.05); }
+    .glass-card:hover { transform: translateY(-6px); }
+
+    /* Skills Progress */
+    .skill-item { margin: 1.5rem 0; }
+    .skill-header { display: flex; justify-content: space-between; margin-bottom: 0.5rem; font-weight: 500; }
+    .progress-bg { background: rgba(255,255,255,0.2); border-radius: 20px; height: 8px; overflow: hidden; }
+    .progress-fill { width: 0%; height: 100%; background: var(--accent-gradient); border-radius: 20px; transition: width 1.2s ease; }
+    .skills-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; margin-top: 1rem; }
+
+    /* Timeline */
+    .timeline-item { position: relative; padding-left: 2rem; margin-bottom: 2rem; border-left: 2px solid var(--accent); }
+
+    /* Achievements */
+    .achievements-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1.5rem; margin-top: 2rem; }
+    .achievement-card { text-align: center; padding: 1.5rem; border-radius: 1.5rem; }
+
+    /* Gallery Grid - Mobile perfect */
+    .insta-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 1.2rem;
+    }
+    .insta-item {
+      position: relative;
+      border-radius: 1.2rem;
+      overflow: hidden;
+      cursor: pointer;
+      transition: 0.3s;
+      background: #1A1E2C;
+      aspect-ratio: 1 / 1;
+    }
+    .insta-item img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.4s; }
+    .insta-item:hover img { transform: scale(1.08); }
+    .insta-overlay {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: linear-gradient(to top, rgba(0,0,0,0.7), transparent);
+      padding: 1rem;
+      opacity: 0;
+      transition: 0.3s;
+    }
+    .insta-item:hover .insta-overlay { opacity: 1; }
+    @media (max-width: 640px) { .insta-grid { grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 0.8rem; } }
+
+    /* Lightbox */
+    .lightbox {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.9);
+      z-index: 1000;
+      justify-content: center;
+      align-items: center;
+      cursor: pointer;
+    }
+    .lightbox.active { display: flex; }
+    .lightbox img { max-width: 90%; max-height: 90%; border-radius: 0.8rem; }
+    .close-lightbox { position: absolute; top: 1rem; right: 2rem; font-size: 2rem; color: white; cursor: pointer; }
+
+    /* Contact Form */
+    .contact-form input, .contact-form textarea {
+      width: 100%;
+      padding: 1rem;
+      margin: 0.6rem 0;
+      border-radius: 1.2rem;
+      background: rgba(255,255,255,0.1);
+      border: 1px solid rgba(255,255,255,0.2);
+      color: inherit;
+    }
+    body.light .contact-form input, body.light .contact-form textarea { background: white; border: 1px solid #e2e8f0; }
+    .whatsapp-btn { background: #25D366; color: white; display: inline-flex; align-items: center; gap: 0.6rem; padding: 0.8rem 1.8rem; border-radius: 50px; font-weight: bold; text-decoration: none; }
+
+    footer { text-align: center; padding: 2rem; border-top: 1px solid rgba(108,99,255,0.1); }
+    @media (max-width: 768px) {
+      h1 { font-size: 2.2rem; }
+      .section-title { font-size: 1.8rem; }
+      section { padding: 3rem 1rem; }
+    }
+    .reveal { opacity: 0; transform: translateY(30px); transition: all 0.7s ease; }
+    .reveal.active { opacity: 1; transform: translateY(0); }
+    .image-fallback { background: linear-gradient(145deg, #1f2833, #0b0c10); display: flex; align-items: center; justify-content: center; width: 100%; height: 100%; color: var(--accent); font-size: 2rem; }
+  </style>
+</head>
+<body class="dark">
+  <!-- Enhanced Preloader with Welcome & Humble Message -->
+  <div class="preloader" id="preloader">
+    <div class="preloader-content">
+      <div class="preloader-ring"></div>
+      <div class="welcome-message">Welcome to my world</div>
+      <div class="humble-line">“Where banking meets heart & humanity”</div>
+      <div class="preloader-dots"><span></span><span></span><span></span></div>
+      <div style="margin-top: 1rem; font-size: 0.75rem; opacity: 0.6;">✨ Megha Mohanty ✨</div>
+    </div>
+  </div>
+
+  <div class="progress-bar" id="progressBar"></div>
+  <div class="back-to-top" id="backToTop"><i class="fas fa-arrow-up"></i></div>
+
+  <nav class="navbar">
+    <div class="nav-container">
+      <div class="logo">MEGHA</div>
+      <div class="hamburger" id="hamburger"><i class="fas fa-bars"></i></div>
+      <div class="nav-links" id="navLinks">
+        <a href="#home">Home</a><a href="#about">About</a><a href="#experience">Experience</a><a href="#skills">Skills</a><a href="#achievements">Achievements</a><a href="#gallery">Gallery</a><a href="#contact">Connect</a>
+        <button class="theme-toggle" id="themeToggle"><i class="fas fa-moon"></i></button>
+      </div>
+    </div>
+  </nav>
+
+  <main>
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+      <div class="animated-bg"></div>
+      <div class="hero-content container">
+        <div class="hero-text">
+          <div class="hero-badge"><i class="fas fa-chart-line"></i> Top 1% Relationship Manager & HR Expert</div>
+          <h1>Megha Mohanty<br><span class="gradient-text">where banking meets heart</span></h1>
+          <div class="typing">I'm a <span id="typedRole"></span></div>
+          <p style="margin: 1.2rem 0; max-width: 550px;">Driving 20% revenue growth, building high-performance teams, and creating lasting client relationships. Dual expertise: Banking + Human Resources.</p>
+          <div class="btn-group">
+            <a href="#contact" class="btn-primary"><i class="fas fa-handshake"></i> Hire Me</a>
+            <a href="#gallery" class="btn-outline"><i class="fas fa-images"></i> View Portfolio</a>
+            <a href="#" id="downloadResume" class="btn-outline"><i class="fas fa-download"></i> Resume</a>
+          </div>
+        </div>
+        <div class="hero-img">
+          <div class="profile-wrapper" id="profileWrapper">
+            <img id="profileImage" src="" alt="Megha Mohanty" loading="lazy">
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- About Story -->
+    <section id="about" class="container reveal">
+      <div class="glass-card">
+        <div class="section-title">The story <span class="gradient-text">behind the numbers</span></div>
+        <div style="display: flex; flex-wrap: wrap; gap: 2rem;">
+          <div style="flex:2"><p style="font-size:1.1rem; line-height:1.6">From state-level sports champion to corporate leader — I've always believed that <strong>relationships drive success</strong>. As a Relationship Manager at Axis Bank, I managed HNI portfolios and boosted revenue by 20% in just months. But my superpower? I'm also an HR strategist who understands people, culture, and performance. This unique blend allows me to optimize both client relationships and internal teams, creating holistic growth.</p>
+          <div style="margin-top:1.5rem; display: flex; gap: 1rem; flex-wrap: wrap;"><span class="hero-badge"><i class="fas fa-trophy"></i> 5+ Awards</span><span class="hero-badge"><i class="fas fa-users"></i> 98% Retention</span><span class="hero-badge"><i class="fas fa-chart-line"></i> 20% Revenue Uplift</span></div>
+          </div>
+          <div style="flex:1; background: rgba(108,99,255,0.1); border-radius: 1.5rem; padding: 1rem; text-align: center;"><i class="fas fa-gem" style="font-size: 2rem; color: var(--accent);"></i><h3>Dual Expertise</h3><p>Banking + Human Resources</p></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Experience Timeline -->
+    <section id="experience" class="container reveal">
+      <div class="section-title">Professional <span class="gradient-text">Journey</span></div>
+      <div class="glass-card">
+        <div class="timeline-item"><i class="fas fa-briefcase" style="color: var(--accent);"></i> <strong>Axis Bank | Assistant Manager (Relationship Manager)</strong><br>Dec 2023 – May 2024<br>✨ Managed HNI & retail portfolio, cross-sold products → 20% revenue growth.<br>✨ CRM, KYC, AML compliance, Top-performing RM award.<br>✨ Client retention rate 95% via personalized advisory.</div>
+      </div>
+    </section>
+
+    <!-- Skills with more features -->
+    <section id="skills" class="container reveal">
+      <div class="section-title">Core <span class="gradient-text">Superpowers</span></div>
+      <div class="skills-grid">
+        <div class="glass-card"><i class="fas fa-comments" style="font-size: 1.8rem; color: var(--accent);"></i><h3>Communication</h3><div class="skill-item"><div class="progress-bg"><div class="progress-fill" data-skill="90"></div></div></div></div>
+        <div class="glass-card"><i class="fas fa-chalkboard-user"></i><h3>Leadership</h3><div class="skill-item"><div class="progress-bg"><div class="progress-fill" data-skill="85"></div></div></div></div>
+        <div class="glass-card"><i class="fas fa-handshake"></i><h3>Employee Relations</h3><div class="skill-item"><div class="progress-bg"><div class="progress-fill" data-skill="79"></div></div></div></div>
+        <div class="glass-card"><i class="fas fa-chart-simple"></i><h3>Performance Management</h3><div class="skill-item"><div class="progress-bg"><div class="progress-fill" data-skill="88"></div></div></div></div>
+        <div class="glass-card"><i class="fas fa-user-plus"></i><h3>Recruitment & Talent</h3><div class="skill-item"><div class="progress-bg"><div class="progress-fill" data-skill="85"></div></div></div></div>
+        <div class="glass-card"><i class="fas fa-chart-line"></i><h3>Wealth Management</h3><div class="skill-item"><div class="progress-bg"><div class="progress-fill" data-skill="92"></div></div></div></div>
+        <div class="glass-card"><i class="fas fa-balance-scale"></i><h3>Conflict Resolution</h3><div class="skill-item"><div class="progress-bg"><div class="progress-fill" data-skill="82"></div></div></div></div>
+        <div class="glass-card"><i class="fas fa-clock"></i><h3>Time Management</h3><div class="skill-item"><div class="progress-bg"><div class="progress-fill" data-skill="88"></div></div></div></div>
+      </div>
+    </section>
+
+    <!-- Achievements -->
+    <section id="achievements" class="container reveal">
+      <div class="section-title">🏆 <span class="gradient-text">Glory Moments</span></div>
+      <div class="achievements-grid">
+        <div class="achievement-card glass-card"><i class="fas fa-medal" style="font-size: 2rem; color: var(--accent);"></i><h3>Best Performing RM</h3><p>Regional recognition</p></div>
+        <div class="achievement-card glass-card"><i class="fas fa-bullseye"></i><h3>Target Achiever</h3><p>Consistent top performer</p></div>
+        <div class="achievement-card glass-card"><i class="fas fa-calendar-alt"></i><h3>Employee of Month</h3><p>Axis Bank honor</p></div>
+        <div class="achievement-card glass-card"><i class="fas fa-running"></i><h3>State-Level Sports</h3><p>Athlete mindset</p></div>
+      </div>
+    </section>
+
+    <!-- Education -->
+    <section id="education" class="container reveal">
+      <div class="section-title">📚 <span class="gradient-text">Education</span></div>
+      <div class="glass-card">
+        <div class="timeline-item"><strong>MBA</strong> – Academy of Business Administration (2023)</div>
+        <div class="timeline-item"><strong>B.Com</strong> – Fakir Mohan Autonomous College (2019)</div>
+        <div class="timeline-item"><strong>Commerce</strong> – Fakir Mohan Junior College (2016)</div>
+        <div class="timeline-item"><strong>Matriculation</strong> – Maharishi Vidya Mandir (2014)</div>
+        <div><i class="fas fa-language"></i> Languages: English, Hindi, Odia, Bengali | <i class="fas fa-heart"></i> Hobbies: Reading, Philosophy, Travelling</div>
+      </div>
+    </section>
+
+    <!-- Gallery Section with Provided Images -->
+    <section id="gallery" class="container reveal">
+      <div class="section-title"><i class="fab fa-instagram"></i> Visual <span class="gradient-text">Chronicles</span></div>
+      <div class="insta-grid" id="instaGrid"></div>
+      <div style="text-align: center; margin-top: 2rem;">
+        <a href="https://www.instagram.com/meghamohanty41/" target="_blank" class="btn-primary"><i class="fab fa-instagram"></i> Follow @meghamohanty41</a>
+      </div>
+    </section>
+
+    <!-- Contact Section - Phone number hidden -->
+    <section id="contact" class="container reveal">
+      <div class="glass-card" style="text-align: center;">
+        <div class="section-title">Let's <span class="gradient-text">collaborate</span></div>
+        <p style="margin-bottom: 1rem;">Ready to scale your business or team? Drop a message.</p>
+        <div class="contact-form" style="max-width: 600px; margin: 0 auto;">
+          <input type="text" placeholder="Full Name" id="contactName">
+          <input type="email" placeholder="Email Address" id="contactEmail">
+          <textarea rows="3" placeholder="Your message / opportunity..."></textarea>
+          <button class="btn-primary" id="submitContact"><i class="fas fa-paper-plane"></i> Send Message</button>
+          <div style="margin: 1.5rem 0;">
+            <a href="https://wa.me/917327060919?text=Hello%20Megha,%20I%20saw%20your%20premium%20portfolio!" target="_blank" class="whatsapp-btn"><i class="fab fa-whatsapp"></i> WhatsApp Me</a>
+          </div>
+          <div><i class="fas fa-envelope"></i> themeghamohanty000@gmail.com | <i class="fas fa-phone-alt"></i> <span style="opacity:0.7;">Contact via WhatsApp or email</span></div>
+        </div>
+      </div>
+    </section>
+
+    <footer>
+      <p>© 2025 Megha Mohanty — Relationship Manager & HR Professional. Built with <i class="fas fa-heart" style="color: #6C63FF;"></i> for impact.</p>
+      <div style="margin-top: 0.5rem;"><a href="#home" style="color:inherit;">Home</a> | <a href="#about" style="color:inherit;">About</a> | <a href="#contact" style="color:inherit;">Connect</a></div>
+    </footer>
+  </main>
+
+  <div class="lightbox" id="lightbox">
+    <span class="close-lightbox">&times;</span>
+    <img id="lightboxImg" src="" alt="Lightbox">
+  </div>
+
+  <script>
+    // ========== IMAGES (Provided by user, with fallback) ==========
+    const imageUrls = [
+      "https://user7922.na.imgto.link/public/20260414/copy-1.avif",
+      "https://user7922.na.imgto.link/public/20260414/city-lights-at-night-instagood-viral-instagram-explorepage-instalike-copy.avif",
+      "https://user7922.na.imgto.link/public/20260414/segment.avif",
+      "https://user7922.na.imgto.link/public/20260414/1.avif",
+      "https://user7922.na.imgto.link/public/20260414/2.avif",
+      "https://user7922.na.imgto.link/public/20260414/some-odia-songs-are.avif"
+    ];
+
+    function setImageWithFallback(imgElement, src, altText) {
+      imgElement.src = src;
+      imgElement.alt = altText;
+      imgElement.onerror = function() {
+        const parent = this.parentElement;
+        if (parent.querySelector('.image-fallback')) return;
+        this.style.display = 'none';
+        const fallback = document.createElement('div');
+        fallback.className = 'image-fallback';
+        fallback.innerHTML = '<i class="fas fa-image"></i>';
+        parent.appendChild(fallback);
+      };
+    }
+
+    // Profile Picture (first image)
+    const profileImg = document.getElementById('profileImage');
+    if (profileImg && imageUrls[0]) setImageWithFallback(profileImg, imageUrls[0], 'Megha Profile');
+
+    // Gallery render
+    const galleryImages = imageUrls;
+    const instaGrid = document.getElementById('instaGrid');
+    function renderGallery() {
+      if (!instaGrid) return;
+      instaGrid.innerHTML = '';
+      galleryImages.forEach((url, idx) => {
+        const div = document.createElement('div');
+        div.className = 'insta-item';
+        const img = document.createElement('img');
+        setImageWithFallback(img, url, `Gallery ${idx+1}`);
+        div.appendChild(img);
+        const overlay = document.createElement('div');
+        overlay.className = 'insta-overlay';
+        overlay.innerHTML = '<i class="fab fa-instagram"></i> View';
+        div.appendChild(overlay);
+        div.addEventListener('click', () => openLightbox(url));
+        instaGrid.appendChild(div);
+      });
+    }
+    renderGallery();
+
+    // Lightbox
+    const lightbox = document.getElementById('lightbox');
+    const lightboxImg = document.getElementById('lightboxImg');
+    function openLightbox(url) { lightboxImg.src = url; lightbox.classList.add('active'); }
+    function closeLightbox() { lightbox.classList.remove('active'); }
+    document.querySelector('.close-lightbox')?.addEventListener('click', closeLightbox);
+    lightbox?.addEventListener('click', (e) => { if (e.target === lightbox) closeLightbox(); });
+
+    // Typing effect
+    const roles = ["Relationship Manager", "HR Strategist", "Banking Expert", "People's Leader"];
+    let idx = 0, charIdx = 0;
+    const typedSpan = document.getElementById("typedRole");
+    function typeRole() {
+      if (charIdx < roles[idx].length) {
+        typedSpan.textContent += roles[idx].charAt(charIdx);
+        charIdx++;
+        setTimeout(typeRole, 90);
+      } else { setTimeout(() => eraseRole(), 2000); }
+    }
+    function eraseRole() {
+      if (charIdx > 0) {
+        typedSpan.textContent = roles[idx].substring(0, charIdx-1);
+        charIdx--;
+        setTimeout(eraseRole, 40);
+      } else { idx = (idx+1) % roles.length; setTimeout(typeRole, 200); }
+    }
+    typeRole();
+
+    // Preloader with smooth hide after load
+    window.addEventListener("load", () => {
+      const preloader = document.getElementById('preloader');
+      setTimeout(() => {
+        preloader.classList.add('hide');
+        setTimeout(() => preloader.remove(), 800);
+      }, 1200); // Show welcome for a moment
+      
+      // Animate skills
+      const fills = document.querySelectorAll('.progress-fill');
+      const obs = new IntersectionObserver((entries) => {
+        entries.forEach(e => { if (e.isIntersecting) { const pct = e.target.getAttribute('data-skill'); if (pct) e.target.style.width = pct + '%'; } });
+      }, { threshold: 0.5 });
+      fills.forEach(f => obs.observe(f));
+    });
+
+    // Scroll progress + back to top
+    window.addEventListener("scroll", () => {
+      const win = document.documentElement.scrollTop;
+      const height = document.documentElement.scrollHeight - window.innerHeight;
+      const scrolled = (win / height) * 100;
+      document.getElementById('progressBar').style.width = scrolled + "%";
+      const back = document.getElementById('backToTop');
+      if (win > 300) back.classList.add('show'); else back.classList.remove('show');
+    });
+    document.getElementById('backToTop')?.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+
+    // Reveal animations
+    const reveals = document.querySelectorAll('.reveal');
+    const revealObs = new IntersectionObserver((entries) => { entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('active'); }); }, { threshold: 0.1 });
+    reveals.forEach(r => revealObs.observe(r));
+
+    // Theme Toggle
+    const themeToggle = document.getElementById('themeToggle');
+    const body = document.body;
+    themeToggle.addEventListener('click', () => {
+      if (body.classList.contains('dark')) { body.classList.remove('dark'); body.classList.add('light'); themeToggle.innerHTML = '<i class="fas fa-sun"></i>'; localStorage.setItem('theme', 'light'); }
+      else { body.classList.remove('light'); body.classList.add('dark'); themeToggle.innerHTML = '<i class="fas fa-moon"></i>'; localStorage.setItem('theme', 'dark'); }
+    });
+    if (localStorage.getItem('theme') === 'light') { body.classList.remove('dark'); body.classList.add('light'); themeToggle.innerHTML = '<i class="fas fa-sun"></i>'; }
+
+    // Mobile menu
+    const hamburger = document.getElementById('hamburger');
+    const navLinks = document.getElementById('navLinks');
+    hamburger.addEventListener('click', () => navLinks.classList.toggle('active'));
+    document.querySelectorAll('.nav-links a').forEach(link => link.addEventListener('click', () => navLinks.classList.remove('active')));
+
+    // Contact & Download
+    document.getElementById('submitContact')?.addEventListener('click', () => alert("✨ Thanks! Megha will respond within 24 hours. Meanwhile, WhatsApp is instant."));
+    document.getElementById('downloadResume')?.addEventListener('click', (e) => { e.preventDefault(); alert("📄 Resume download will be available soon. Contact via WhatsApp for immediate copy."); });
+  </script>
+</body>
+</html>
